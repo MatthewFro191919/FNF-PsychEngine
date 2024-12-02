@@ -52,8 +52,6 @@ import psychlua.HScript;
 import crowplexus.iris.Iris;
 #end
 
-import flixel.ui.FlxBar;
-
 /**
  * This is where all the Gameplay stuff happens and is managed
  *
@@ -176,7 +174,7 @@ class PlayState extends MusicBeatState
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
-	public var healthBar:FlxBar;
+	public var healthBar:Bar;
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
@@ -536,7 +534,7 @@ class PlayState extends MusicBeatState
 		add(healthBarBG);
 		if(ClientPrefs.downScroll) healthBarBG.y = FlxG.height * 0.09;
 
-		healthBar = new FlxBar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
+		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
 		healthBar.screenCenter(X);
 		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
@@ -720,8 +718,8 @@ class PlayState extends MusicBeatState
 	#end
 
 	public function reloadHealthBarColors() {
-		healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]), FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
-		healthBar.updateBar();
+		healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
