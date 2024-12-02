@@ -528,25 +528,21 @@ class PlayState extends MusicBeatState
 		healthBarBG.y = FlxG.height * 0.85;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = !ClientPrefs.hideHud;
 		healthBarBG.xAdd = -25;
 		healthBarBG.yAdd = -25;
 		add(healthBarBG);
-		if(!ClientPrefs.downScroll) healthBarBG.y = FlxG.height * 0.09;
 
-		healthBar = new Bar(healthBarBG.x + 25, healthBarBG.y + 25, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 50), Std.int(healthBarBG.height - 50), this,
-			'health', 0, 2);
+		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'coolhealthbar', function() return health, 0, 2);
+		healthBar.screenCenter(X);
+		healthBar.x = FlxG.height * 0.85;
+		healthBar.y = FlxG.height * 0.85;
+		healthBar.x = FlxG.width * 0.85;
+		healthBar.y = FlxG.width * 0.85;
+		healthBar.leftToRight = false;
 		healthBar.scrollFactor.set();
-		// healthBar
-		healthBar.alpha = !ClientPrefs.healthBarAlpha;
-		add(healthBar);
-		healthBarBG.sprTracker = healthBar;
-		
-		healthBarOverlay = new FlxSprite(healthBar.x, healthBar.y).loadGraphic(Paths.image("coolhealthbar", "shared"));
-		healthBarOverlay.alpha = 0.5;
-		healthBarOverlay.setGraphicSize(Std.int(healthBar.width), Std.int(healthBar.height));
-		healthBarOverlay.updateHitbox();
-		add(healthBarOverlay);
+		healthBar.visible = !ClientPrefs.data.hideHud;
+		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
+		reloadHealthBarColors();		
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
@@ -579,10 +575,7 @@ class PlayState extends MusicBeatState
 
 		uiGroup.cameras = [camHUD];
 		noteGroup.cameras = [camHUD];
-		comboGroup.cameras = [camHUD]
-		healthBar.cameras = [camHUD];
-		healthBarOverlay.cameras = [camHUD];
-		healthBarBG.cameras = [camHUD];
+		comboGroup.cameras = [camHUD];
 
 		startingSong = true;
 
