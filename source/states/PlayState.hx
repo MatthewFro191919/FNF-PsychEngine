@@ -524,12 +524,8 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite('coolhealthborder');
-		healthBarBG.y = FlxG.height * 0.85;
-		healthBarBG.screenCenter(X);
+		healthBarBG = new AttachedSprite(healthBar.x, healthBar.y).loadGraphic(Paths.image('coolhealthborder');
 		healthBarBG.scrollFactor.set();
-		healthBarBG.xAdd = -25;
-		healthBarBG.yAdd = -25;
 		add(healthBarBG);
 
 		healthBar = new Bar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
@@ -538,14 +534,14 @@ class PlayState extends MusicBeatState
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.data.hideHud;
 		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
-		reloadHealthBarColors();		
+		reloadHealthBarColors();
 		
-		healthBarOverlay = new FlxSprite(healthBar.x, healthBar.y).loadGraphic(Paths.image("coolhealthbar", "shared"));
+		healthBarOverlay = new FlxSprite(healthBar.x, healthBar.y).loadGraphic(Paths.image("coolhealthbar"));
 		healthBarOverlay.alpha = 0.5;
 		healthBarOverlay.setGraphicSize(Std.int(healthBar.width), Std.int(healthBar.height));
 		healthBarOverlay.updateHitbox();
+		add(healthBar);
 		add(healthBarOverlay);
-		uiGroup.add(healthBar);
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
