@@ -67,6 +67,7 @@ import states.TitleState;
 		'opponentplay' => false
 	];
 
+	public var sauceNoteSkin:String = 'Szechuan Sauce';
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public var ratingOffset:Int = 0;
 	public var sickWindow:Int = 45;
