@@ -1,19 +1,22 @@
 local phase2 = false
 local phase1 = false
 function onCreate()
-	phase1 = songName == 'The Idea' or songName == 'The Idea Minus'
+	phase1 = songName == 'The Idea' or songName == 'The Idea Minus' or songName == 'Silence is Death'
 	phase2 = songName == 'Combo Meal' or songName == 'Combo Meal Erect'
 	--main thing
+
+      if songName == 'Silence is Death' then
+      else
+        makeAnimatedLuaSprite('inuko','ronald/inuko-boper', 330, 740);
+	addAnimationByPrefix('inuko','bop','xo window',24,false)
+	scaleObject('inuko', 1.47, 1.47);
+	addLuaSprite('inuko',false);
+      end
+
 	makeAnimatedLuaSprite('theWall','ronald/wall', -80, 0);
 	addAnimationByPrefix('theWall','bop','Símbolo 12 instancia 1',24,false)
 	
 	scaleObject('theWall', 1.47, 1.47);
-
-	makeAnimatedLuaSprite('inuko','ronald/inuko-boper', 330, 740);
-	addAnimationByPrefix('inuko','bop','xo window',24,false)
-	scaleObject('inuko', 1.47, 1.47);
-
-	addLuaSprite('inuko',false);
 	addLuaSprite('theWall',false);
 
 	--makeLuaSprite('theGround','ronald/floor',-0 , 1470);
