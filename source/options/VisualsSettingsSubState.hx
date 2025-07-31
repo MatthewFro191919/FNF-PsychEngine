@@ -74,6 +74,23 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			option.onChange = onChangeSplashSkin;
 		}
 
+		var sauceNoteSkins:Array<String> = Mods.mergeAllTextsNamed('images/ronald/list.txt');
+		if(sauceNoteSkins.length > 0)
+		{
+			if(!sauceNoteSkins.contains(ClientPrefs.data.sauceNoteSkin))
+				ClientPrefs.data.sauceNoteSkin = ClientPrefs.defaultData.sauceNoteSkin; //Reset to default if saved noteskin couldnt be found
+
+			sauceNoteSkins.insert(0, ClientPrefs.defaultData.sauceNoteSkin); //Default skin always comes first
+			var option:Option = new Option('Sauce Note Skins:',
+				"Select your prefered Note skin.",
+				'sauceNoteSkin',
+				STRING,
+				sauceNoteSkins);
+			addOption(option);
+			option.onChange = onChangeNoteSkin;
+			noteOptionID = optionsArray.length - 1;
+		}
+
 		var option:Option = new Option('Note Splash Opacity',
 			'How much transparent should the Note Splashes be.',
 			'splashAlpha',
