@@ -97,6 +97,8 @@ class Note extends FlxSprite
 	public static var swagWidth:Float = 160 * 0.7;
 	public static var colArray:Array<String> = ['purple', 'blue', 'green', 'red'];
 	public static var defaultNoteSkin(default, never):String = 'noteSkins/NOTE_assets';
+	public static var defaultSauceNoteSkin(default, never):String = '';
+
 
 	public var noteSplashData:NoteSplashData = {
 		disabled: false,
@@ -360,11 +362,13 @@ class Note extends FlxSprite
 		if(postfix == null) postfix = '';
 
 		var skin:String = texture + postfix;
+		var sauceskin:String = texture + postfix;
 		if(texture.length < 1)
 		{
 			skin = PlayState.SONG != null ? PlayState.SONG.arrowSkin : null;
 			if(skin == null || skin.length < 1)
 				skin = defaultNoteSkin + postfix;
+				sauceskin = defaultSauceNoteSkin + postfix;
 		}
 		else rgbShader.enabled = false;
 
