@@ -234,6 +234,17 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 		});
 	}
 
+	function changeSauceNoteSkin(note:StrumNote)
+	{
+		var skin:String = Note.defaultSauceNoteSkin‎;
+		var customSkin:String = skin + Note.getNoteSkinPostfix();
+		if(Paths.fileExists('images/$customSkin.png', IMAGE)) skin = customSkin;
+
+		note.texture = skin; //Load texture and anims
+		note.reloadNote();
+		note.playAnim('static');
+	}
+
 	function changeNoteSkin(note:StrumNote)
 	{
 		var skin:String = Note.defaultNoteSkin;
