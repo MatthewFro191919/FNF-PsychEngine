@@ -76,7 +76,7 @@ function onCreate()
 	    scaleObject('shag', 2.6, 2.6);
 	    setLuaSpriteScrollFactor('shag',0.84 , 0.84);
 
-		addHaxeLibrary('ColorSwap')
+		addHaxeLibrary('ColorSwap', 'shaders')
 		runHaxeCode([[
 			var colorSwap = new ColorSwap();
 			var colorSwapDarker = new ColorSwap();
