@@ -432,6 +432,11 @@ class Note extends FlxSprite
 		if(ClientPrefs.data.noteSkin != ClientPrefs.defaultData.noteSkin)
 			skin = '-' + ClientPrefs.data.noteSkin.trim().toLowerCase().replace(' ', '_');
 		return skin;
+
+		var sauceskin:String = '';
+		if(ClientPrefs.data.sauceNoteSkin != ClientPrefs.defaultData.sauceNoteSkin)
+			sauceskin = '-' + ClientPrefs.data.sauceNoteSkin.trim().toLowerCase().replace(' ', '_');
+		return sauceskin;
 	}
 
 	function loadNoteAnims() {
