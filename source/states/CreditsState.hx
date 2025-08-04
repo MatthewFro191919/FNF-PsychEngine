@@ -38,7 +38,6 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-<<<<<<< HEAD
 			['Extra Keys Team'],
 			['tposejank', 			'tposejank',		'EK Main Programmer',			 							 'https://twitter.com/tposejank', 		'B9AF27'],
 			['srPerez', 			'perez', 			'1-9 keys art', 											 'https://twitter.com/NewSrPerez', 		'FF9E00'],
@@ -97,7 +96,6 @@ class CreditsState extends MusicBeatState
 			[""],
 			["Psych Engine Discord"],
 			["Join the Psych Ward!", "discord", "", "https://discord.gg/2ka77eMXDv", "5165F6"]
->>>>>>> main
 		];
 		
 		for(i in defaultList)
