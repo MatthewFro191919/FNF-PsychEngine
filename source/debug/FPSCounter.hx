@@ -47,20 +47,23 @@ class FPSCounter extends TextField
 	// Event Handlers
 	private override function __enterFrame(deltaTime:Float):Void
 	{
-		// prevents the overlay from updating every frame, why would you need to anyways
-		if (deltaTimeout > 1000) {
-			deltaTimeout = 0.0;
-			return;
-		}
-
 		final now:Float = haxe.Timer.stamp() * 1000;
 		times.push(now);
 		while (times[0] < now - 1000) times.shift();
+		// prevents the overlay from updating every frame, why would you need to anyways @crowplexus
+		if (deltaTimeout < 50) {
+			deltaTimeout += deltaTime;
+			return;
+		}
 
 		currentFPS = times.length < FlxG.updateFramerate ? times.length : FlxG.updateFramerate;		
 		updateText();
+<<<<<<< HEAD
 		text += '\nEK v${MainMenuState.extraKeysVersion}';
 		deltaTimeout += deltaTime;
+=======
+		deltaTimeout = 0.0;
+>>>>>>> main
 	}
 
 	public dynamic function updateText():Void { // so people can override it in hscript
@@ -73,5 +76,5 @@ class FPSCounter extends TextField
 	}
 
 	inline function get_memoryMegas():Float
-		return cast(System.totalMemory, UInt);
+		return cpp.vm.Gc.memInfo64(cpp.vm.Gc.MEM_INFO_USAGE);
 }

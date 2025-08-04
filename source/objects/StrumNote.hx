@@ -13,8 +13,8 @@ class StrumNote extends FlxSprite
 	public var rgbShader:RGBShaderReference;
 	public var resetAnim:Float = 0;
 	private var noteData:Int = 0;
-	public var direction:Float = 90;//plan on doing scroll directions soon -bb
-	public var downScroll:Bool = false;//plan on doing scroll directions soon -bb
+	public var direction:Float = 90;
+	public var downScroll:Bool = false;
 	public var sustainReduce:Bool = true;
 	public var trackedScale:Float = 0.7;
 	private var player:Int;
@@ -56,6 +56,7 @@ class StrumNote extends FlxSprite
 		noteData = leData;
 		this.player = player;
 		this.noteData = leData;
+		this.ID = noteData;
 		super(x, y);
 
 		var skin:String = null;
@@ -67,6 +68,7 @@ class StrumNote extends FlxSprite
 
 		texture = skin; //Load texture and anims
 		scrollFactor.set();
+		playAnim('static');
 	}
 
 	public function reloadNote()
@@ -133,6 +135,7 @@ class StrumNote extends FlxSprite
 		}
 	}
 
+<<<<<<< HEAD
 	public function retryBound() {
 		trackedScale = trackedScale * 0.85;
 		setGraphicSize(initialWidth * (trackedScale * (PlayState.isPixelStage ? PlayState.daPixelZoom /** (1/ExtraKeysHandler.instance.data.pixelScales[PlayState.SONG.mania])) */: 1)));
@@ -179,6 +182,13 @@ class StrumNote extends FlxSprite
 			x += ((sWidth * trackedScale) - padding) * (-((PlayState.SONG.mania+1) / 2) + noteData);
 		}
 		//trace(padding);
+=======
+	public function playerPosition()
+	{
+		x += Note.swagWidth * noteData;
+		x += 50;
+		x += ((FlxG.width / 2) * player);
+>>>>>>> main
 	}
 
 	override function update(elapsed:Float) {
