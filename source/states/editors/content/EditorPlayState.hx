@@ -337,7 +337,6 @@ class EditorPlayState extends MusicBeatSubstate
 				if(PlayState.SONG.notes[noteSec].changeBPM == true)
 					tempBpm = PlayState.SONG.notes[noteSec].bpm;
 
-<<<<<<< HEAD:source/states/editors/EditorPlayState.hx
 				var daNoteData:Int = Std.int(songNotes[1] % (PlayState.SONG.mania + 1));
 				var gottaHitNote:Bool = section.mustHitSection;
 
@@ -421,10 +420,8 @@ class EditorPlayState extends MusicBeatSubstate
 						swagNote.x += FlxG.width / 2 + 25;
 					}
 				}
-=======
 				secTime += Conductor.calculateCrochet(tempBpm) * (Math.round(4 * section.sectionBeats) / 4);
 				cachedSectionTimes.push(secTime);
->>>>>>> main:source/states/editors/content/EditorPlayState.hx
 			}
 		}
 
