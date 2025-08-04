@@ -1010,8 +1010,4 @@ class PhillyStreets extends BaseStage
 			});
 		}
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main
