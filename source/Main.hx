@@ -38,16 +38,13 @@ import haxe.CallStack;
 import haxe.io.Path;
 #end
 
-<<<<<<< HEAD
 import backend.ExtraKeysHandler;
 
 #if linux
-=======
 import backend.Highscore;
 
 // NATIVE API STUFF, YOU CAN IGNORE THIS AND SCROLL //
 #if (linux && !debug)
->>>>>>> main
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('#define GAMEMODE_AUTO')
 #end
@@ -244,9 +241,7 @@ class Main extends Sprite
 			}
 		}
 
-<<<<<<< HEAD
 		errMsg += "\nUncaught Error: " + e.error + "\nIf this is related to EK, report it here: https://github.com/FunkinExtraKeys/FNF-PsychEngine-EK\nIf not, report this error to Psych Engine: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
-=======
 		errMsg += "\nUncaught Error: " + e.error;
 		// remove if you're modding and want the crash log message to contain the link
 		// please remember to actually modify the link for the github page to report the issues to.
@@ -254,7 +249,6 @@ class Main extends Sprite
 		errMsg += "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine";
 		#end
 		errMsg += "\n\n> Crash Handler written by: sqirra-rng";
->>>>>>> main
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
