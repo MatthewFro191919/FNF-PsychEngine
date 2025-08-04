@@ -347,13 +347,90 @@ class HScript extends Iris
 		set('Function_StopLua', LuaUtils.Function_StopLua); //doesnt do much cuz HScript has a lower priority than Lua
 		set('Function_StopHScript', LuaUtils.Function_StopHScript);
 		set('Function_StopAll', LuaUtils.Function_StopAll);
+<<<<<<< HEAD
+		
+		set('add', FlxG.state.add);
+		set('insert', FlxG.state.insert);
+		set('remove', FlxG.state.remove);
+
+		if(PlayState.instance == FlxG.state)
+		{
+			set('addBehindGF', PlayState.instance.addBehindGF);
+			set('addBehindDad', PlayState.instance.addBehindDad);
+			set('addBehindBF', PlayState.instance.addBehindBF);
+			setSpecialObject(PlayState.instance, false, PlayState.instance.instancesExclude);
+		}
+
+		if(varsToBring != null) {
+			for (key in Reflect.fields(varsToBring)) {
+				key = key.trim();
+				var value = Reflect.field(varsToBring, key);
+				//trace('Key $key: $value');
+				set(key, Reflect.field(varsToBring, key));
+			}
+			varsToBring = null;
+		}
+	}
+
+	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null): #if (SScript == "17.1.618") Tea #else TeaCall #end {
+		if (funcToRun == null) return null;
+
+		if(!exists(funcToRun)) {
+			#if LUA_ALLOWED
+			FunkinLua.luaTrace(origin + ' - No HScript function named: $funcToRun', false, false, FlxColor.RED);
+			#else
+			PlayState.instance.addTextToDebug(origin + ' - No HScript function named: $funcToRun', FlxColor.RED);
+			#end
+			return null;
+		}
+
+		final callValue = call(funcToRun, funcArgs);
+		if (!callValue.succeeded)
+		{
+			final e = callValue.exceptions[0];
+			if (e != null) {
+				var msg:String = e.toString();
+				#if LUA_ALLOWED
+				if(parentLua != null)
+				{
+					FunkinLua.luaTrace('$origin: ${parentLua.lastCalledFunction} - $msg', false, false, FlxColor.RED);
+					return null;
+				}
+				#end
+				PlayState.instance.addTextToDebug('$origin - $msg', FlxColor.RED);
+			}
+			return null;
+		}
+		return callValue;
+	}
+
+	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>): #if (SScript == "17.1.618") Tea #else TeaCall #end {
+		if (funcToRun == null) return null;
+		return call(funcToRun, funcArgs);
+=======
+>>>>>>> main
 	}
 
 	#if LUA_ALLOWED
 	public static function implement(funk:FunkinLua) {
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
 			initHaxeModuleCode(funk, codeToRun, varsToBring);
+<<<<<<< HEAD
+			final retVal : #if (SScript == "17.1.618") Tea #else TeaCall #end = funk.hscript.executeCode(funcToRun, funcArgs);
+			if (retVal != null) {
+				if(retVal.succeeded)
+					return (retVal.returnValue == null || LuaUtils.isOfTypes(retVal.returnValue, [Bool, Int, Float, String, Array])) ? retVal.returnValue : null;
+
+				final e = retVal.exceptions[0];
+				final calledFunc:String = if(funk.hscript.origin == funk.lastCalledFunction) funcToRun else funk.lastCalledFunction;
+				if (e != null)
+					FunkinLua.luaTrace(funk.hscript.origin + ":" + calledFunc + " - " + e, false, false, FlxColor.RED);
+				return null;
+			}
+			else if (funk.hscript.returnValue != null)
+=======
 			if (funk.hscript != null)
+>>>>>>> main
 			{
 				final retVal:IrisCall = funk.hscript.call(funcToRun, funcArgs);
 				if (retVal != null)
@@ -589,6 +666,8 @@ class CustomInterp extends crowplexus.hscript.Interp
 		return null;
 	}
 }
+<<<<<<< HEAD
+=======
 #else
 class HScript
 {
@@ -609,4 +688,5 @@ class HScript
 	}
 	#end
 }
+>>>>>>> main
 #end

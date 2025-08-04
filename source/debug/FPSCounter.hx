@@ -1,5 +1,6 @@
 package debug;
 
+import states.MainMenuState;
 import flixel.FlxG;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
@@ -57,7 +58,12 @@ class FPSCounter extends TextField
 
 		currentFPS = times.length < FlxG.updateFramerate ? times.length : FlxG.updateFramerate;		
 		updateText();
+<<<<<<< HEAD
+		text += '\nEK v${MainMenuState.extraKeysVersion}';
+		deltaTimeout += deltaTime;
+=======
 		deltaTimeout = 0.0;
+>>>>>>> main
 	}
 
 	public dynamic function updateText():Void { // so people can override it in hscript

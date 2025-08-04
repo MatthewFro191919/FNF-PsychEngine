@@ -69,6 +69,11 @@ class EditorPlayState extends MusicBeatSubstate
 	public function new(noteList:Array<Note>, allVocals:Array<FlxSound>)
 	{
 		super();
+
+		keysArray = [];
+		for (i in 0...PlayState.SONG.mania + 1){
+			keysArray.push(PlayState.SONG.mania + '_key_$i');
+		}
 		
 		/* setting up some important data */
 		this.vocals = allVocals[0];
@@ -332,8 +337,94 @@ class EditorPlayState extends MusicBeatSubstate
 				if(PlayState.SONG.notes[noteSec].changeBPM == true)
 					tempBpm = PlayState.SONG.notes[noteSec].bpm;
 
+<<<<<<< HEAD:source/states/editors/EditorPlayState.hx
+				var daNoteData:Int = Std.int(songNotes[1] % (PlayState.SONG.mania + 1));
+				var gottaHitNote:Bool = section.mustHitSection;
+
+				if (songNotes[1] > PlayState.SONG.mania)
+				{
+					gottaHitNote = !section.mustHitSection;
+				}
+
+				var oldNote:Note;
+				if (unspawnNotes.length > 0)
+					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+				else
+					oldNote = null;
+
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, this);
+				swagNote.mustPress = gottaHitNote;
+				swagNote.sustainLength = songNotes[2];
+				//swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
+				swagNote.noteType = songNotes[3];
+				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
+
+				swagNote.scrollFactor.set();
+
+				unspawnNotes.push(swagNote);
+
+				final susLength:Float = swagNote.sustainLength / Conductor.stepCrochet;
+				final floorSus:Int = Math.floor(susLength);
+
+				if(floorSus > 0) {
+					for (susNote in 0...floorSus + 1)
+					{
+						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+
+						var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote), daNoteData, oldNote, true, this);
+						sustainNote.mustPress = gottaHitNote;
+						//sustainNote.gfNote = (section.gfSection && (songNotes[1]<4));
+						sustainNote.noteType = swagNote.noteType;
+						sustainNote.scrollFactor.set();
+						sustainNote.parent = swagNote;
+						unspawnNotes.push(sustainNote);
+						swagNote.tail.push(sustainNote);
+
+						sustainNote.correctionOffset = swagNote.height / 2;
+						if(!PlayState.isPixelStage)
+						{
+							if(oldNote.isSustainNote)
+							{
+								oldNote.scale.y *= Note.SUSTAIN_SIZE / oldNote.frameHeight;
+								oldNote.scale.y /= playbackRate;
+								oldNote.updateHitbox();
+							}
+
+							if(ClientPrefs.data.downScroll)
+								sustainNote.correctionOffset = 0;
+						}
+						else if(oldNote.isSustainNote)
+						{
+							oldNote.scale.y /= playbackRate;
+							oldNote.updateHitbox();
+						}
+
+						if (sustainNote.mustPress) sustainNote.x += FlxG.width / 2; // general offset
+						else if(ClientPrefs.data.middleScroll)
+						{
+							sustainNote.x += 310;
+							if(daNoteData > 1) //Up and Right
+								sustainNote.x += FlxG.width / 2 + 25;
+						}
+					}
+				}
+
+				if (swagNote.mustPress)
+				{
+					swagNote.x += FlxG.width / 2; // general offset
+				}
+				else if(ClientPrefs.data.middleScroll)
+				{
+					swagNote.x += 310;
+					if(daNoteData > 1) //Up and Right
+					{
+						swagNote.x += FlxG.width / 2 + 25;
+					}
+				}
+=======
 				secTime += Conductor.calculateCrochet(tempBpm) * (Math.round(4 * section.sectionBeats) / 4);
 				cachedSectionTimes.push(secTime);
+>>>>>>> main:source/states/editors/content/EditorPlayState.hx
 			}
 		}
 
@@ -444,7 +535,7 @@ class EditorPlayState extends MusicBeatSubstate
 	{
 		var strumLineX:Float = ClientPrefs.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X;
 		var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 50;
-		for (i in 0...4)
+		for (i in 0...PlayState.SONG.mania + 1)
 		{
 			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
@@ -474,6 +565,43 @@ class EditorPlayState extends MusicBeatSubstate
 
 			strumLineNotes.add(babyArrow);
 			babyArrow.playerPosition();
+		}
+
+		adaptStrumline(opponentStrums);
+		adaptStrumline(playerStrums);
+
+		if (ClientPrefs.data.keybindShowcase) {
+			for (i in 0...playerStrums.members.length) {
+				var keyShowcase = new KeybindShowcase(
+					playerStrums.members[i].x, 
+					ClientPrefs.data.downScroll ? playerStrums.members[i].y - 30 : playerStrums.members[i].y + playerStrums.members[i].height + 5, 
+					ClientPrefs.keyBinds.get(keysArray[i]), 
+					FlxG.camera, 
+					playerStrums.members[i].width / 2, 
+					PlayState.SONG.mania);
+				keyShowcase.onComplete = function() {
+					remove(keyShowcase);
+				}
+				add(keyShowcase);
+			}
+		}
+	}
+
+	public function adaptStrumline(strumline:FlxTypedGroup<StrumNote>) {
+		var strumLineWidth:Float = 0;
+		var strumLineIsBig:Bool = false;
+
+		for (note in strumline.members) strumLineWidth += note.width;
+		strumLineIsBig = strumLineWidth > StrumBoundaries.getBoundaryWidth().x;
+
+		while (strumLineIsBig) {
+			strumLineWidth = 0;
+			for (note in strumline.members) {
+				note.retryBound();
+				strumLineWidth += note.width;
+			}
+			trace('Strumline is too big! Shrinking and retrying.');
+			strumLineIsBig = strumLineWidth > StrumBoundaries.getBoundaryWidth().x;
 		}
 	}
 

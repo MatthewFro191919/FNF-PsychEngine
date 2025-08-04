@@ -1,5 +1,6 @@
 package objects;
 
+import backend.ExtraKeysHandler;
 import backend.animation.PsychAnimationController;
 import shaders.RGBPalette;
 import flixel.system.FlxAssets.FlxShader;
@@ -303,11 +304,26 @@ class NoteSplash extends FlxSprite
 		var maxFps:Int = 26;
 		if (conf != null)
 		{
+<<<<<<< HEAD
+			var animID:Int = direction + ((animNum - 1) * Note.colArray.length);
+			//trace('anim: ${animation.curAnim.name}, $animID');
+			var offs:Array<Float> = config.offsets[FlxMath.wrap(animID, 0, config.offsets.length-1)];
+			offset.x += offs[0] * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
+			offset.y += offs[1] * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
+			minFps = config.minFps;
+			maxFps = config.maxFps;
+		}
+		else
+		{
+			offset.x += -58 * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
+			offset.y += -55 * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
+=======
 			minFps = conf.fps[0];
 			if (minFps < 0) minFps = 0;
 
 			maxFps = conf.fps[1];
 			if (maxFps < 0) maxFps = 0;
+>>>>>>> main
 		}
 
 		if (animation.curAnim != null)
@@ -325,7 +341,74 @@ class NoteSplash extends FlxSprite
 		return anim;
 	}
 
+<<<<<<< HEAD
+	function loadAnims(skin:String, ?animName:String = null):NoteSplashConfig {
+		maxAnims = 0;
+		frames = Paths.getSparrowAtlas(skin);
+		var config:NoteSplashConfig = null;
+		if(frames == null)
+		{
+			skin = defaultNoteSplash + getSplashSkinPostfix();
+			frames = Paths.getSparrowAtlas(skin);
+			if(frames == null) //if you really need this, you really fucked something up
+			{
+				skin = defaultNoteSplash;
+				frames = Paths.getSparrowAtlas(skin);
+			}
+		}
+
+		setGraphicSize(width * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3));
+		updateHitbox();
+
+		config = precacheConfig(skin);
+		_configLoaded = skin;
+
+		if(animName == null)
+			animName = config != null ? config.anim : 'note splash';
+
+		while(true) {
+			var animID:Int = maxAnims + 1;
+			for (i in 0...ExtraKeysHandler.instance.data.maxKeys + 1) {
+				if (!addAnimAndCheck('note$i-$animID', '$animName ${ExtraKeysHandler.instance.data.animations[i].note} $animID', 24, false)) {
+					//trace('maxAnims: $maxAnims');
+					return config;
+				}
+			}
+			maxAnims++;
+			//trace('currently: $maxAnims');
+		}
+	}
+
+	public static function precacheConfig(skin:String)
+	{
+		if(configs.exists(skin)) return configs.get(skin);
+
+		var path:String = Paths.getPath('images/$skin.txt', TEXT, true);
+		var configFile:Array<String> = CoolUtil.coolTextFile(path);
+		if(configFile.length < 1) return null;
+		
+		var framerates:Array<String> = configFile[1].split(' ');
+		var offs:Array<Array<Float>> = [];
+		for (i in 2...configFile.length)
+		{
+			var animOffs:Array<String> = configFile[i].split(' ');
+			offs.push([Std.parseFloat(animOffs[0]), Std.parseFloat(animOffs[1])]);
+		}
+
+		var config:NoteSplashConfig = {
+			anim: configFile[0],
+			minFps: Std.parseInt(framerates[0]),
+			maxFps: Std.parseInt(framerates[1]),
+			offsets: offs
+		};
+		configs.set(skin, config);
+		return config;
+	}
+
+	function addAnimAndCheck(name:String, anim:String, ?framerate:Int = 24, ?loop:Bool = false)
+=======
 	function checkForAnim(anim:String)
+>>>>>>> main
 	{
 		var animFrames = [];
 		@:privateAccess

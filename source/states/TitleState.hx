@@ -1,5 +1,6 @@
 package states;
 
+import backend.ExtraKeysHandler;
 import backend.WeekData;
 
 import flixel.input.keyboard.FlxKey;
@@ -57,8 +58,13 @@ class TitleState extends MusicBeatState
 	var wackyImage:FlxSprite;
 
 	#if TITLE_SCREEN_EASTER_EGG
+<<<<<<< HEAD
+	var easterEggKeys:Array<String> = [
+		'SHADOW', 'RIVER', 'BBPANZU', 'TPOSE'
+=======
 	final easterEggKeys:Array<String> = [
 		'SHADOW', 'RIVEREN', 'BBPANZU', 'PESSY'
+>>>>>>> main
 	];
 	final allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var easterEggKeysBuffer:String = '';
@@ -78,6 +84,65 @@ class TitleState extends MusicBeatState
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
+<<<<<<< HEAD
+		super.create();
+
+		FlxG.save.bind('funkin', CoolUtil.getSavePath());
+
+		ClientPrefs.loadPrefs();
+
+		if (ExtraKeysHandler.instance.data.scales == null)
+			MusicBeatState.switchState(new ScaleSimulationState());
+
+		#if CHECK_FOR_UPDATES
+		if(ClientPrefs.data.checkForUpdates && !closedState) {
+			trace('checking for update');
+			var http = new haxe.Http("https://fnlookup-apiv2.vercel.app/api?extrakeys");
+
+			http.onData = function (data:String)
+			{
+				updateVersion = data.split('\n')[0].trim();
+				var curVersion:String = MainMenuState.extraKeysVersion.trim();
+				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
+				if(updateVersion != curVersion) {
+					trace('versions arent matching!');
+					mustUpdate = true;
+				}
+			}
+
+			http.onError = function (error) {
+				trace('error: $error');
+			}
+
+			http.request();
+		}
+		#end
+
+		Highscore.load();
+
+		// IGNORE THIS!!!
+		titleJSON = tjson.TJSON.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
+
+		#if TITLE_SCREEN_EASTER_EGG
+		if (FlxG.save.data.psychDevsEasterEgg == null) FlxG.save.data.psychDevsEasterEgg = ''; //Crash prevention
+		switch(FlxG.save.data.psychDevsEasterEgg.toUpperCase())
+		{
+			case 'SHADOW':
+				titleJSON.gfx += 210;
+				titleJSON.gfy += 40;
+			case 'RIVER':
+				titleJSON.gfx += 180;
+				titleJSON.gfy += 40;
+			case 'BBPANZU':
+				titleJSON.gfx += 45;
+				titleJSON.gfy += 100;
+			case 'TPOSE':
+				titleJSON.gfx += 115;
+		}
+		#end
+
+=======
+>>>>>>> main
 		if(!initialized)
 		{
 			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
@@ -137,8 +202,49 @@ class TitleState extends MusicBeatState
 
 		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
+<<<<<<< HEAD
+
+		var easterEgg:String = FlxG.save.data.psychDevsEasterEgg;
+		if(easterEgg == null) easterEgg = ''; //html5 fix
+
+		switch(easterEgg.toUpperCase())
+		{
+			// IGNORE THESE, GO DOWN A BIT
+			#if TITLE_SCREEN_EASTER_EGG
+			case 'SHADOW':
+				gfDance.frames = Paths.getSparrowAtlas('ShadowBump');
+				gfDance.animation.addByPrefix('danceLeft', 'Shadow Title Bump', 24);
+				gfDance.animation.addByPrefix('danceRight', 'Shadow Title Bump', 24);
+			case 'RIVER':
+				gfDance.frames = Paths.getSparrowAtlas('RiverBump');
+				gfDance.animation.addByIndices('danceLeft', 'River Title Bump', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'River Title Bump', [29, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+			case 'BBPANZU':
+				gfDance.frames = Paths.getSparrowAtlas('BBBump');
+				gfDance.animation.addByIndices('danceLeft', 'BB Title Bump', [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'BB Title Bump', [27, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "", 24, false);
+			case 'TPOSE':
+				gfDance.frames = Paths.getSparrowAtlas('Highwire');
+				gfDance.animation.addByPrefix('danceLeft', 'Highwire TPose', 24);
+				gfDance.animation.addByPrefix('danceRight', 'Highwire TPose', 24);
+			#end
+
+			default:
+			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
+			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
+			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
+				gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
+				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+		}
+
+		add(gfDance);
+		add(logoBl);
+		if(swagShader != null)
+=======
 		
 		if(ClientPrefs.data.shaders)
+>>>>>>> main
 		{
 			swagShader = new ColorSwap();
 			gfDance.shader = swagShader.shader;
@@ -534,9 +640,13 @@ class TitleState extends MusicBeatState
 				case 5:
 					deleteCoolText();
 				case 6:
+<<<<<<< HEAD
+					createCoolText(['Extra Keys', 'by'], -40);
+=======
 					createCoolText(['Not associated', 'with'], -40);
+>>>>>>> main
 				case 8:
-					addMoreText('newgrounds', -40);
+					addMoreText('tposejank', -40);
 					ngSpr.visible = true;
 				case 9:
 					deleteCoolText();
@@ -583,8 +693,13 @@ class TitleState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('JingleShadow'));
 					case 'BBPANZU':
 						sound = FlxG.sound.play(Paths.sound('JingleBB'));
+<<<<<<< HEAD
+					case 'TPOSE':
+						FlxG.sound.play(Paths.sound('TPose'));
+=======
 					case 'PESSY':
 						sound = FlxG.sound.play(Paths.sound('JinglePessy'));
+>>>>>>> main
 
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
@@ -607,6 +722,11 @@ class TitleState extends MusicBeatState
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
 					});
+				} else if (easteregg == 'TPOSE') {
+					remove(ngSpr);
+					remove(credGroup);
+					FlxG.camera.flash(FlxColor.WHITE, 0.6);
+					transitioning = false;
 				}
 				else
 				{
