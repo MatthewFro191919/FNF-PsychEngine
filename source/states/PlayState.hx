@@ -32,7 +32,6 @@ import substates.PauseSubState;
 import substates.GameOverSubstate;
 
 #if !flash
-<<<<<<< HEAD
 import flixel.addons.display.FlxRuntimeShader;
 #end
 #if CUSTOM_SHADERS_ALLOWED
@@ -40,7 +39,6 @@ import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
 import openfl.filters.BitmapFilter;
 import shaders.CustomShaders;
 #end
-=======
 import openfl.filters.ShaderFilter;
 #end
 
@@ -110,7 +108,6 @@ class PlayState extends MusicBeatState
 
 	#if HSCRIPT_ALLOWED
 	public var hscriptArray:Array<HScript> = [];
-<<<<<<< HEAD
 	public var instancesExclude:Array<String> = [];
 	#end
 
@@ -125,7 +122,6 @@ class PlayState extends MusicBeatState
 	public var modchartShader:Map<String, Effect> = new Map<String, Effect>();
 	public var shaderUpdates:Array<Float->Void> = [];
 	#end
-=======
 >>>>>>> main
 	#end
 
@@ -298,12 +294,10 @@ class PlayState extends MusicBeatState
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
-<<<<<<< HEAD
 	#if VIDEOS_ALLOWED public var videoSprites:Array<VideoSpriteManager> = []; #end
 
 	public var luaVirtualPad:FlxVirtualPad;
 
-=======
 	private static var _lastLoadedModDirectory:String = '';
 	public static var nextReloadAll:Bool = false;
 >>>>>>> main
@@ -354,10 +348,8 @@ class PlayState extends MusicBeatState
 		luaVpadCam.bgColor.alpha = 0;
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
-<<<<<<< HEAD
 		FlxG.cameras.add(luaVpadCam, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
-=======
 >>>>>>> main
 
 		persistentUpdate = true;
@@ -423,7 +415,6 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-<<<<<<< HEAD
 			case 'stage': new states.stages.StageWeek1(); //Week 1
 			case 'spooky': new states.stages.Spooky(); //Week 2
 			case 'philly': new states.stages.Philly(); //Week 3
@@ -433,7 +424,6 @@ class PlayState extends MusicBeatState
 			case 'school': new states.stages.School(); //Week 6 - Senpai, Roses
 			case 'schoolEvil': new states.stages.SchoolEvil(); //Week 6 - Thorns
 			case 'tank': new states.stages.Tank(); //Week 7 - Ugh, Guns, Stress
-=======
 			case 'stage': new StageWeek1(); 			//Week 1
 			case 'spooky': new Spooky();				//Week 2
 			case 'philly': new Philly();				//Week 3
@@ -455,10 +445,8 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
-<<<<<<< HEAD
 		// "GLOBAL" SCRIPTS
 		#if ((LUA_ALLOWED || HSCRIPT_ALLOWED) && sys)
-=======
 		if (!stageData.hide_girlfriend)
 		{
 			if(SONG.gfVersion == null || SONG.gfVersion.length < 1) SONG.gfVersion = 'gf'; //Fix for the Chart Editor
@@ -566,7 +554,6 @@ class PlayState extends MusicBeatState
 			timeTxt.y += 3;
 		}
 
-<<<<<<< HEAD
 		var splash:NoteSplash = new NoteSplash(100, 100);
 		splash.setupNoteSplash(100, 100);
 		grpNoteSplashes.add(splash);
@@ -576,7 +563,6 @@ class PlayState extends MusicBeatState
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
 		generateSong(SONG.song);
-=======
 		generateSong();
 >>>>>>> main
 
@@ -682,9 +668,7 @@ class PlayState extends MusicBeatState
 			}
 		#end
 
-<<<<<<< HEAD
 		addMobileControls(false);
-=======
 		if(eventNotes.length > 0)
 		{
 			for (event in eventNotes) event.strumTime -= eventEarlyTrigger(event);
@@ -710,10 +694,8 @@ class PlayState extends MusicBeatState
 
 		resetRPC();
 
-<<<<<<< HEAD
 		setOnScripts('mania', SONG.mania);
 
-=======
 		stagesFunc(function(stage:BaseStage) stage.createPost());
 >>>>>>> main
 		callOnScripts('onCreatePost');
@@ -922,7 +904,6 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-<<<<<<< HEAD
 	public function startVideo(name:String) #if VIDEOS_ALLOWED :VideoManager#end
 	{
 		#if VIDEOS_ALLOWED
@@ -943,7 +924,6 @@ class PlayState extends MusicBeatState
 		});
 
 		return video;
-=======
 	public var videoCutscene:VideoSprite = null;
 	public function startVideo(name:String, forMidSong:Bool = false, canSkip:Bool = true, loop:Bool = false, playOnLoad:Bool = true)
 	{
@@ -1419,12 +1399,10 @@ class PlayState extends MusicBeatState
 				vocals.loadEmbedded(playerVocals != null ? playerVocals : Paths.voices(songData.song));
 				
 				var oppVocals = Paths.voices(songData.song, (dad.vocalsFile == null || dad.vocalsFile.length < 1) ? 'Opponent' : dad.vocalsFile);
-<<<<<<< HEAD
 				if(oppVocals != null){
 					opponentVocals.loadEmbedded(oppVocals);
 					splitVocals = true;
 				}
-=======
 				if(oppVocals != null && oppVocals.length > 0) opponentVocals.loadEmbedded(oppVocals);
 >>>>>>> main
 			}
@@ -1449,7 +1427,6 @@ class PlayState extends MusicBeatState
 		notes = new FlxTypedGroup<Note>();
 		noteGroup.add(notes);
 
-<<<<<<< HEAD
 		var noteData:Array<SwagSection>;
 
 		// NEW SHIT
@@ -1461,7 +1438,6 @@ class PlayState extends MusicBeatState
 		#else
 		if (Assets.exists(file))
 		#end
-=======
 		try
 >>>>>>> main
 		{
@@ -1480,7 +1456,6 @@ class PlayState extends MusicBeatState
 	
 		for (section in sectionsData)
 		{
-<<<<<<< HEAD
 			for (songNotes in section.sectionNotes)
 			{
 				var daStrumTime:Float = songNotes[0];
@@ -1491,7 +1466,6 @@ class PlayState extends MusicBeatState
 				if (songNotes[1] > SONG.mania)
 				{
 					gottaHitNote = !section.mustHitSection;
-=======
 			if (section.changeBPM != null && section.changeBPM && section.bpm != null && daBpm != section.bpm)
 				daBpm = section.bpm;
 
@@ -1532,13 +1506,11 @@ class PlayState extends MusicBeatState
 				swagNote.gfNote = (section.gfSection && gottaHitNote == section.mustHitSection);
 				swagNote.animSuffix = isAlt ? "-alt" : "";
 				swagNote.mustPress = gottaHitNote;
-<<<<<<< HEAD
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<(SONG.mania + 1)));
 				swagNote.noteType = songNotes[3];
 				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
 
-=======
 				swagNote.sustainLength = holdLength;
 				swagNote.noteType = noteType;
 	
@@ -1554,11 +1526,9 @@ class PlayState extends MusicBeatState
 					{
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-<<<<<<< HEAD
 						var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote), daNoteData, oldNote, true);
 						sustainNote.mustPress = gottaHitNote;
 						sustainNote.gfNote = (section.gfSection && (songNotes[1]<(SONG.mania + 1)));
-=======
 						var sustainNote:Note = new Note(spawnTime + (curStepCrochet * susNote), noteColumn, oldNote, true);
 						sustainNote.animSuffix = swagNote.animSuffix;
 						sustainNote.mustPress = swagNote.mustPress;
@@ -1878,10 +1848,8 @@ class PlayState extends MusicBeatState
 		stagesFunc(function(stage:BaseStage) stage.closeSubState());
 		if (paused)
 		{
-<<<<<<< HEAD
 			if (FlxG.sound.music != null && !startingSong)
 				resyncVocals(splitVocals ? [opponentVocals, vocals] : [vocals]);
-=======
 			if (FlxG.sound.music != null && !startingSong && canResync)
 			{
 				resyncVocals();
@@ -1908,12 +1876,10 @@ class PlayState extends MusicBeatState
 	#if DISCORD_ALLOWED
 	override public function onFocus():Void
 	{
-<<<<<<< HEAD
 		callOnScripts('onFocus');
 		if (health > 0 && !paused) resetRPC(Conductor.songPosition > 0.0);
 		super.onFocus();
 		callOnScripts('onFocusPost');
-=======
 		super.onFocus();
 		if (!paused && health > 0)
 		{
@@ -1924,7 +1890,6 @@ class PlayState extends MusicBeatState
 
 	override public function onFocusLost():Void
 	{
-<<<<<<< HEAD
 		callOnScripts('onFocusLost');
 		#if DISCORD_ALLOWED
 		if (health > 0 && !paused && autoUpdateRPC) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
@@ -1932,7 +1897,6 @@ class PlayState extends MusicBeatState
 
 		super.onFocusLost();
 		callOnScripts('onFocusLostPost');
-=======
 		super.onFocusLost();
 		if (!paused && health > 0 && autoUpdateRPC)
 		{
@@ -1960,7 +1924,6 @@ class PlayState extends MusicBeatState
 	{
 		if(finishTimer != null || vocals == null) return;
 
-<<<<<<< HEAD
 		for(vocal in vocals){
 			vocal.pause();
 
@@ -1973,7 +1936,6 @@ class PlayState extends MusicBeatState
 				#if FLX_PITCH vocal.pitch = playbackRate; #end
 			}
 			vocal.play();
-=======
 		trace('resynced vocals at ' + Math.floor(Conductor.songPosition));
 
 		FlxG.sound.music.play();
@@ -2349,7 +2311,6 @@ class PlayState extends MusicBeatState
 				FlxTween.globalManager.clear();
 				FlxG.camera.setFilters([]);
 
-<<<<<<< HEAD
 				#if VIDEOS_ALLOWED
 				// i assume it's better removing the thing on gameover
 				if(videoSprites.length > 0)
@@ -2358,7 +2319,6 @@ class PlayState extends MusicBeatState
 				#end
 
 				openSubState(new GameOverSubstate());
-=======
 				if(GameOverSubstate.deathDelay > 0)
 				{
 					gameOverTimer = new FlxTimer().start(GameOverSubstate.deathDelay, function(_)
@@ -2896,7 +2856,6 @@ class PlayState extends MusicBeatState
 		if (stageUI != "normal")
 			uiFolder = uiPrefix + "UI/";
 
-<<<<<<< HEAD
 		for (rating in ratingsData){
 			var ratingImage:String = uiPrefix + rating.image + uiSuffix;
 			var leRating = new FlxSprite().loadGraphic(Paths.image(ratingImage));
@@ -2908,7 +2867,6 @@ class PlayState extends MusicBeatState
 			var leRating = new FlxSprite().loadGraphic(Paths.image(ratingImage));
 			ratingsCache.set(ratingImage, leRating);
 		}
-=======
 		for (rating in ratingsData)
 			Paths.image(uiFolder + rating.image + uiPostfix);
 		for (i in 0...10)
@@ -2978,7 +2936,6 @@ class PlayState extends MusicBeatState
 			rating.y -= ClientPrefs.data.comboOffset[1];
 			rating.antialiasing = antialias;
 
-<<<<<<< HEAD
 			var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
 			comboSpr.screenCenter();
 			comboSpr.x = placement;
@@ -3002,7 +2959,6 @@ class PlayState extends MusicBeatState
 				rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
 				comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
 			}
-=======
 		rating.loadGraphic(Paths.image(uiFolder + daRating.image + uiPostfix));
 		rating.screenCenter();
 		rating.x = placement - 40;
@@ -3034,7 +2990,6 @@ class PlayState extends MusicBeatState
 
 			var seperatedScore:Array<Int> = [];
 
-<<<<<<< HEAD
 			if(combo >= 1000) {
 				seperatedScore.push(Math.floor(combo / 1000) % 10);
 			}
@@ -3058,7 +3013,6 @@ class PlayState extends MusicBeatState
 				if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 				else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 				numScore.updateHitbox();
-=======
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
 		if (showCombo)
@@ -3383,9 +3337,7 @@ class PlayState extends MusicBeatState
 			var postfix:String = '';
 			if(note != null) postfix = note.animSuffix;
 
-<<<<<<< HEAD
 			var animToPlay:String = singAnimation(direction) + 'miss' + suffix;
-=======
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, direction)))] + 'miss' + postfix;
 >>>>>>> main
 			char.playAnim(animToPlay, true);
@@ -3427,9 +3379,7 @@ class PlayState extends MusicBeatState
 		else if(!note.noAnimation)
 		{
 			var char:Character = dad;
-<<<<<<< HEAD
 			var animToPlay:String = singAnimation(note.noteData) + altAnim;
-=======
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + note.animSuffix;
 >>>>>>> main
 			if(note.gfNote) char = gf;
@@ -3556,7 +3506,6 @@ class PlayState extends MusicBeatState
 			if(!note.noteSplashData.disabled && !note.isSustainNote) spawnNoteSplashOnNote(note);
 		}
 
-<<<<<<< HEAD
 		if(!note.noAnimation) {
 			var animToPlay:String = singAnimation(note.noteData);
 
@@ -3601,7 +3550,6 @@ class PlayState extends MusicBeatState
 		if (guitarHeroSustains && note.isSustainNote) gainHealth = false;
 		if (gainHealth) health += note.hitHealth * healthGain;
 
-=======
 		stagesFunc(function(stage:BaseStage) stage.goodNoteHit(note));
 >>>>>>> main
 		var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
@@ -3703,7 +3651,6 @@ class PlayState extends MusicBeatState
 	var lastStepHit:Int = -1;
 	override function stepHit()
 	{
-<<<<<<< HEAD
 		if (SONG.needsVoices && FlxG.sound.music.time >= -ClientPrefs.data.noteOffset)
 		{
 			var timeSub:Float = Conductor.songPosition - Conductor.offset;
@@ -3716,7 +3663,6 @@ class PlayState extends MusicBeatState
 				resyncVocals([opponentVocals]);
 		}
 
-=======
 >>>>>>> main
 		super.stepHit();
 
@@ -4161,7 +4107,6 @@ class PlayState extends MusicBeatState
 		#end
 		return false;
 	}
-<<<<<<< HEAD
 	#end
 
 	public function makeLuaVirtualPad(DPadMode:String, ActionMode:String) {
@@ -4242,6 +4187,5 @@ class PlayState extends MusicBeatState
 		}
 		return false;
 	}
-=======
 >>>>>>> main
 }
