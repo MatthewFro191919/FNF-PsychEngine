@@ -347,7 +347,6 @@ class HScript extends Iris
 		set('Function_StopLua', LuaUtils.Function_StopLua); //doesnt do much cuz HScript has a lower priority than Lua
 		set('Function_StopHScript', LuaUtils.Function_StopHScript);
 		set('Function_StopAll', LuaUtils.Function_StopAll);
-<<<<<<< HEAD
 		
 		set('add', FlxG.state.add);
 		set('insert', FlxG.state.insert);
@@ -407,15 +406,12 @@ class HScript extends Iris
 	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>): #if (SScript == "17.1.618") Tea #else TeaCall #end {
 		if (funcToRun == null) return null;
 		return call(funcToRun, funcArgs);
-=======
->>>>>>> main
 	}
 
 	#if LUA_ALLOWED
 	public static function implement(funk:FunkinLua) {
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
 			initHaxeModuleCode(funk, codeToRun, varsToBring);
-<<<<<<< HEAD
 			final retVal : #if (SScript == "17.1.618") Tea #else TeaCall #end = funk.hscript.executeCode(funcToRun, funcArgs);
 			if (retVal != null) {
 				if(retVal.succeeded)
@@ -428,9 +424,7 @@ class HScript extends Iris
 				return null;
 			}
 			else if (funk.hscript.returnValue != null)
-=======
 			if (funk.hscript != null)
->>>>>>> main
 			{
 				final retVal:IrisCall = funk.hscript.call(funcToRun, funcArgs);
 				if (retVal != null)
@@ -666,8 +660,6 @@ class CustomInterp extends crowplexus.hscript.Interp
 		return null;
 	}
 }
-<<<<<<< HEAD
-=======
 #else
 class HScript
 {
@@ -688,5 +680,4 @@ class HScript
 	}
 	#end
 }
->>>>>>> main
 #end
