@@ -98,12 +98,11 @@ class Song
 			}
 		}
 
-<<<<<<< HEAD
 		// fix mania being null (for non ek charts)
 		if (songJson.mania == null)
 		{
 			songJson.mania = 3;
-=======
+		}
 		var sectionsData:Array<SwagSection> = songJson.notes;
 		if(sectionsData == null) return;
 
@@ -124,7 +123,6 @@ class Song
 				if(!Std.isOfType(note[3], String))
 					note[3] = Note.defaultNoteTypes[note[3]]; //compatibility with Week 7 and 0.1-0.3 psych charts
 			}
->>>>>>> main
 		}
 	}
 
