@@ -304,7 +304,6 @@ class NoteSplash extends FlxSprite
 		var maxFps:Int = 26;
 		if (conf != null)
 		{
-<<<<<<< HEAD
 			var animID:Int = direction + ((animNum - 1) * Note.colArray.length);
 			//trace('anim: ${animation.curAnim.name}, $animID');
 			var offs:Array<Float> = config.offsets[FlxMath.wrap(animID, 0, config.offsets.length-1)];
@@ -317,13 +316,11 @@ class NoteSplash extends FlxSprite
 		{
 			offset.x += -58 * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
 			offset.y += -55 * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
-=======
 			minFps = conf.fps[0];
 			if (minFps < 0) minFps = 0;
 
 			maxFps = conf.fps[1];
 			if (maxFps < 0) maxFps = 0;
->>>>>>> main
 		}
 
 		if (animation.curAnim != null)
@@ -341,7 +338,6 @@ class NoteSplash extends FlxSprite
 		return anim;
 	}
 
-<<<<<<< HEAD
 	function loadAnims(skin:String, ?animName:String = null):NoteSplashConfig {
 		maxAnims = 0;
 		frames = Paths.getSparrowAtlas(skin);
@@ -406,9 +402,7 @@ class NoteSplash extends FlxSprite
 	}
 
 	function addAnimAndCheck(name:String, anim:String, ?framerate:Int = 24, ?loop:Bool = false)
-=======
 	function checkForAnim(anim:String)
->>>>>>> main
 	{
 		var animFrames = [];
 		@:privateAccess
