@@ -264,8 +264,6 @@ class PhillyBlazin extends BaseStage
 		picoFight.noteMiss(note);
 		darnellFight.noteMiss(note);
 	}
-<<<<<<< HEAD
+
 }
-=======
 }
->>>>>>> main

@@ -180,14 +180,12 @@ class Note extends FlxSprite
 		var mania = 3;
 		if (PlayState.SONG != null) mania = PlayState.SONG.mania;
 
-<<<<<<< HEAD
+
 		var arr:Array<FlxColor> = ClientPrefs.data.arrowRGB[getIndex(mania, noteData)];
 		if(PlayState.isPixelStage) arr = ClientPrefs.data.arrowRGBPixel[getIndex(mania, noteData)];
 
 		if (noteData > -1 /*&& noteData <= arr.length*/)
-=======
 		if (arr != null && noteData > -1 && noteData <= arr.length)
->>>>>>> main
 		{
 			rgbShader.r = arr[0];
 			rgbShader.g = arr[1];
@@ -355,7 +353,7 @@ class Note extends FlxSprite
 		if(globalRgbShaders[noteData] == null)
 		{
 			var newRGB:RGBPalette = new RGBPalette();
-<<<<<<< HEAD
+
 			globalRgbShaders[noteData] = newRGB;
 
 			var mania = 3;
@@ -363,11 +361,9 @@ class Note extends FlxSprite
 
 			var arr:Array<FlxColor> = (!PlayState.isPixelStage) ? ClientPrefs.data.arrowRGB[ExtraKeysHandler.instance.data.keys[mania].notes[noteData]] : ClientPrefs.data.arrowRGBPixel[ExtraKeysHandler.instance.data.keys[mania].notes[noteData]];
 			if (noteData > -1 /*&& noteData <= arr.length*/)
-=======
 			var arr:Array<FlxColor> = (!PlayState.isPixelStage) ? ClientPrefs.data.arrowRGB[noteData] : ClientPrefs.data.arrowRGBPixel[noteData];
 			
 			if (arr != null && noteData > -1 && noteData <= arr.length)
->>>>>>> main
 			{
 				newRGB.r = arr[0];
 				newRGB.g = arr[1];
@@ -474,14 +470,12 @@ class Note extends FlxSprite
 	}
 
 	function loadNoteAnims() {
-<<<<<<< HEAD
+
 		var mania = 3;
 		if (PlayState.SONG != null) mania = PlayState.SONG.mania;
 		var noteAnim = getAnimSet(getIndex(mania, noteData)).note;
-=======
 		if (colArray[noteData] == null)
 			return;
->>>>>>> main
 
 		if (isSustainNote)
 		{
@@ -497,15 +491,13 @@ class Note extends FlxSprite
 	}
 
 	function loadPixelNoteAnims() {
-<<<<<<< HEAD
+
 		var mania = 3;
 		if (PlayState.SONG != null) mania = PlayState.SONG.mania;
 		var noteAnimStr = getAnimSet(getIndex(mania, noteData)).note;
 		var noteAnimInt = getAnimSet(getIndex(mania, noteData)).pixel;
-=======
 		if (colArray[noteData] == null)
 			return;
->>>>>>> main
 
 		if(isSustainNote)
 		{
@@ -603,7 +595,7 @@ class Note extends FlxSprite
 
 	public function clipToStrumNote(myStrum:StrumNote)
 	{
-<<<<<<< HEAD
+
 		var mania = 3;
 		if (PlayState.SONG != null) mania = PlayState.SONG.mania;
 		var Mscale = ExtraKeysHandler.instance.data.scales[mania];
@@ -613,10 +605,8 @@ class Note extends FlxSprite
 		var center:Float = myStrum.y + offsetY + sWidth / 2;
 		if(isSustainNote && (mustPress || !ignoreNote) &&
 			(!mustPress || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit))))
-=======
 		var center:Float = myStrum.y + offsetY + Note.swagWidth / 2;
 		if((mustPress || !ignoreNote) && (wasGoodHit || (prevNote.wasGoodHit && !canBeHit)))
->>>>>>> main
 		{
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);

@@ -2,14 +2,12 @@ package states.editors;
 
 import flixel.graphics.FlxGraphic;
 
-<<<<<<< HEAD
+
 import flixel.animation.FlxAnimation;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.*;
 import flixel.ui.FlxButton;
-=======
 import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
->>>>>>> main
 import flixel.util.FlxDestroyUtil;
 
 import openfl.net.FileReference;
@@ -21,7 +19,7 @@ import objects.Character;
 import objects.HealthIcon;
 import objects.Bar;
 
-<<<<<<< HEAD
+
 // flixel 5.7.0+ fix
 #if (FLX_DEBUG || flixel < version("5.7.0"))
 typedef PointerGraphic = flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
@@ -31,12 +29,10 @@ class PointerGraphic extends openfl.display.BitmapData {}
 #end
 
 class CharacterEditorState extends MusicBeatState
-=======
 import states.editors.content.Prompt;
 import states.editors.content.PsychJsonPrinter;
 
 class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
->>>>>>> main
 {
 	var character:Character;
 	var ghost:FlxSprite;

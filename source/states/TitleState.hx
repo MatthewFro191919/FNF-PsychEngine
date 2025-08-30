@@ -58,13 +58,11 @@ class TitleState extends MusicBeatState
 	var wackyImage:FlxSprite;
 
 	#if TITLE_SCREEN_EASTER_EGG
-<<<<<<< HEAD
+
 	var easterEggKeys:Array<String> = [
 		'SHADOW', 'RIVER', 'BBPANZU', 'TPOSE'
-=======
 	final easterEggKeys:Array<String> = [
 		'SHADOW', 'RIVEREN', 'BBPANZU', 'PESSY'
->>>>>>> main
 	];
 	final allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var easterEggKeysBuffer:String = '';
@@ -84,7 +82,7 @@ class TitleState extends MusicBeatState
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
-<<<<<<< HEAD
+
 		super.create();
 
 		FlxG.save.bind('funkin', CoolUtil.getSavePath());
@@ -141,8 +139,6 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-=======
->>>>>>> main
 		if(!initialized)
 		{
 			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
@@ -202,7 +198,7 @@ class TitleState extends MusicBeatState
 
 		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
-<<<<<<< HEAD
+
 
 		var easterEgg:String = FlxG.save.data.psychDevsEasterEgg;
 		if(easterEgg == null) easterEgg = ''; //html5 fix
@@ -241,10 +237,8 @@ class TitleState extends MusicBeatState
 		add(gfDance);
 		add(logoBl);
 		if(swagShader != null)
-=======
 		
 		if(ClientPrefs.data.shaders)
->>>>>>> main
 		{
 			swagShader = new ColorSwap();
 			gfDance.shader = swagShader.shader;
@@ -640,11 +634,9 @@ class TitleState extends MusicBeatState
 				case 5:
 					deleteCoolText();
 				case 6:
-<<<<<<< HEAD
+
 					createCoolText(['Extra Keys', 'by'], -40);
-=======
 					createCoolText(['Not associated', 'with'], -40);
->>>>>>> main
 				case 8:
 					addMoreText('tposejank', -40);
 					ngSpr.visible = true;
@@ -693,13 +685,11 @@ class TitleState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('JingleShadow'));
 					case 'BBPANZU':
 						sound = FlxG.sound.play(Paths.sound('JingleBB'));
-<<<<<<< HEAD
+
 					case 'TPOSE':
 						FlxG.sound.play(Paths.sound('TPose'));
-=======
 					case 'PESSY':
 						sound = FlxG.sound.play(Paths.sound('JinglePessy'));
->>>>>>> main
 
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
