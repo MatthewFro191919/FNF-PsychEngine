@@ -135,7 +135,6 @@ class StrumNote extends FlxSprite
 		}
 	}
 
-<<<<<<< HEAD
 	public function retryBound() {
 		trackedScale = trackedScale * 0.85;
 		setGraphicSize(initialWidth * (trackedScale * (PlayState.isPixelStage ? PlayState.daPixelZoom /** (1/ExtraKeysHandler.instance.data.pixelScales[PlayState.SONG.mania])) */: 1)));
@@ -182,13 +181,11 @@ class StrumNote extends FlxSprite
 			x += ((sWidth * trackedScale) - padding) * (-((PlayState.SONG.mania+1) / 2) + noteData);
 		}
 		//trace(padding);
-=======
 	public function playerPosition()
 	{
 		x += Note.swagWidth * noteData;
 		x += 50;
 		x += ((FlxG.width / 2) * player);
->>>>>>> main
 	}
 
 	override function update(elapsed:Float) {
