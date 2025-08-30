@@ -114,7 +114,6 @@ class ControlsSubState extends MusicBeatSubstate
 		grpBinds.clear();
 
 		var myID:Int = 0;
-<<<<<<< HEAD
 
 		// this approach is also null safe. you wont run to NORs with this way
 		options = [[false, 'NOTES']];
@@ -170,9 +169,7 @@ class ControlsSubState extends MusicBeatSubstate
 		}
 
 		for (i in 0...options.length)
-=======
 		for (i => option in options)
->>>>>>> main
 		{
 			if(onKeyboardMode || option[0])
 			{
@@ -524,7 +521,6 @@ class ControlsSubState extends MusicBeatSubstate
 
 	function updateText(?change:Int = 0)
 	{
-<<<<<<< HEAD
 		if (onKeyboardMode && FlxG.keys.pressed.SHIFT) move = move * 3;
 
 		if(move != 0)
@@ -535,9 +531,7 @@ class ControlsSubState extends MusicBeatSubstate
 			if(curSelected < 0) curSelected = curOptions.length - 1;
 			else if (curSelected >= curOptions.length) curSelected = 0;
 		}
-=======
 		curSelected = FlxMath.wrap(curSelected + change, 0, curOptions.length - 1);
->>>>>>> main
 
 		var num:Int = curOptionsValid[curSelected];
 		var addNum:Int = 0;
