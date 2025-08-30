@@ -32,7 +32,6 @@ import substates.PauseSubState;
 import substates.GameOverSubstate;
 
 #if !flash
-
 import flixel.addons.display.FlxRuntimeShader;
 #end
 #if CUSTOM_SHADERS_ALLOWED
@@ -41,8 +40,6 @@ import openfl.filters.BitmapFilter;
 import shaders.CustomShaders;
 #end
 import openfl.filters.ShaderFilter;
-#end
-
 import shaders.ErrorHandledShader;
 
 import objects.VideoSprite;
