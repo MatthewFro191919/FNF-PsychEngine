@@ -1,5 +1,6 @@
 package backend;
 
+#if DISCORD_ALLOWED
 import Sys.sleep;
 import lime.app.Application;
 import hxdiscord_rpc.Discord;
@@ -143,3 +144,106 @@ class DiscordClient
 	}
 	#end
 }
+
+@:allow(backend.DiscordClient)
+private final class DiscordPresence
+{
+	public var state(get, set):String;
+	public var details(get, set):String;
+	public var smallImageKey(get, set):String;
+	public var largeImageKey(get, set):String;
+	public var largeImageText(get, set):String;
+	public var startTimestamp(get, set):Int;
+	public var endTimestamp(get, set):Int;
+
+	@:noCompletion private var __presence:DiscordRichPresence;
+
+	function new()
+	{
+		__presence = DiscordRichPresence.create();
+	}
+
+	public function toString():String
+	{
+		return FlxStringUtil.getDebugString([
+			LabelValuePair.weak("state", state),
+			LabelValuePair.weak("details", details),
+			LabelValuePair.weak("smallImageKey", smallImageKey),
+			LabelValuePair.weak("largeImageKey", largeImageKey),
+			LabelValuePair.weak("largeImageText", largeImageText),
+			LabelValuePair.weak("startTimestamp", startTimestamp),
+			LabelValuePair.weak("endTimestamp", endTimestamp)
+		]);
+	}
+
+	@:noCompletion inline function get_state():String
+	{
+		return __presence.state;
+	}
+
+	@:noCompletion inline function set_state(value:String):String
+	{
+		return __presence.state = value;
+	}
+
+	@:noCompletion inline function get_details():String
+	{
+		return __presence.details;
+	}
+
+	@:noCompletion inline function set_details(value:String):String
+	{
+		return __presence.details = value;
+	}
+
+	@:noCompletion inline function get_smallImageKey():String
+	{
+		return __presence.smallImageKey;
+	}
+
+	@:noCompletion inline function set_smallImageKey(value:String):String
+	{
+		return __presence.smallImageKey = value;
+	}
+
+	@:noCompletion inline function get_largeImageKey():String
+	{
+		return __presence.largeImageKey;
+	}
+	
+	@:noCompletion inline function set_largeImageKey(value:String):String
+	{
+		return __presence.largeImageKey = value;
+	}
+
+	@:noCompletion inline function get_largeImageText():String
+	{
+		return __presence.largeImageText;
+	}
+
+	@:noCompletion inline function set_largeImageText(value:String):String
+	{
+		return __presence.largeImageText = value;
+	}
+
+	@:noCompletion inline function get_startTimestamp():Int
+	{
+		return __presence.startTimestamp;
+	}
+
+	@:noCompletion inline function set_startTimestamp(value:Int):Int
+	{
+		return __presence.startTimestamp = value;
+	}
+
+	@:noCompletion inline function get_endTimestamp():Int
+	{
+		return __presence.endTimestamp;
+	}
+
+	@:noCompletion inline function set_endTimestamp(value:Int):Int
+	{
+		return __presence.endTimestamp = value;
+	}
+}
+#end
